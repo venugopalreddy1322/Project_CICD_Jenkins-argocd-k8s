@@ -6,13 +6,13 @@ pipeline {
 
     }
     stages {
-        stage('Build package') {
+        /*stage('Build package') {
             steps {
                 script {
                     sh 'mvn clean install'
                 }
             }
-        }
+        }*/
         stage('Static code analysis:SonarQube') {
             steps {
                 script {
@@ -62,5 +62,11 @@ pipeline {
                 }
             }
         }
+        stage('clean workspace') {
+            steps {
+                cleanWs()
+            }
+        }
+
     }
 }

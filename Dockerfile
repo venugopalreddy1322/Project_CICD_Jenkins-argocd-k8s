@@ -1,14 +1,20 @@
-# You can change this base image to anything else
-# But make sure to use the correct version of Java
-FROM openjdk:11
+# Stage 1: Build the application
+FROM maven:3.8.4-openjdk-11-slim AS build
+WORKDIR /app
 
-# Simply the artifact path
-#ARG artifact=target/spring-boot-web.jar
+# Copy only the necessary files to leverage Docker cache
+COPY pom.xml .
+COPY src ./src
 
+# Build the application
+RUN mvn clean package
+
+# Stage 2: Create the final image
+FROM openjdk:11-jre-slim
 WORKDIR /opt/app
 
-#COPY ${artifact} app.jar
-COPY target/spring-boot-web.jar /opt/app/app.jar
+# Copy only the built artifact from the previous stage
+COPY --from=build /app/target/spring-boot-web.jar /opt/app/app.jar
 
 # This should not be changed
-ENTRYPOINT ["java","-jar","app.jar"]
+ENTRYPOINT ["java", "-jar", "app.jar"]
