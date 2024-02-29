@@ -55,6 +55,7 @@ pipeline {
                     sed -i "s/replaceImageTag/${BUILD_NUMBER}/g" k8smanifest.yaml
                     git add k8smanifest.yaml
                     git commit -m "Update deployment image to version ${BUILD_NUMBER}" k8smanifest.yaml
+                    git pull https://${GITHUB_AUTH}@github.com/${GIT_USER_NAME}/${GIT_REPO_NAME} main
                     git push https://${GITHUB_AUTH}@github.com/${GIT_USER_NAME}/${GIT_REPO_NAME} HEAD:refs/heads/main
                     '''
                     }
