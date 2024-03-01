@@ -13,19 +13,19 @@ pipeline {
                 }
             }
         }*/
+        stage('Build docker image from Dockerfile') {
+            steps {
+                script {
+                     dockerImage = docker.build("${DOCKER_IMAGE_NAME}:${DOCKER_IMAGE_TAG}")
+                }
+            }
+        }
         stage('Static code analysis:SonarQube') {
             steps {
                 script {
                     withSonarQubeEnv(credentialsId: 'sonarqube') {
                     sh 'mvn sonar:sonar'
                     }
-                }
-            }
-        }
-        stage('Build docker image from Dockerfile') {
-            steps {
-                script {
-                     dockerImage = docker.build("${DOCKER_IMAGE_NAME}:${DOCKER_IMAGE_TAG}")
                 }
             }
         }
