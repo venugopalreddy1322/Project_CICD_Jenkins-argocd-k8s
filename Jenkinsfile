@@ -56,12 +56,13 @@ pipeline {
                     sed -i "s/replaceImageTag/${BUILD_REPO_TAG}/g" k8s_manifests/k8smanifest.yaml
                     git add k8s_manifests/k8smanifest.yaml
                     git commit -m "Update deployment image to version ${BUILD_NUMBER}" k8s_manifests/k8smanifest.yaml
-                    //git branch -M main
-                    //git fetch https://${GITHUB_AUTH}@github.com/${GIT_USER_NAME}/${GIT_REPO_NAME} main
-                    //git checkout FETCH_HEAD k8s_manifests/k8smanifest.yaml  # Checkout the remote version
-                    //git add k8s_manifests/k8smanifest.yaml
-                    //git commit --amend --no-edit  # Amend the previous commit with the resolved file
-                    //git pull https://${GITHUB_AUTH}@github.com/${GIT_USER_NAME}/${GIT_REPO_NAME} main
+                    /* git branch -M main
+                    git fetch https://${GITHUB_AUTH}@github.com/${GIT_USER_NAME}/${GIT_REPO_NAME} main
+                    git checkout FETCH_HEAD k8s_manifests/k8smanifest.yaml  # Checkout the remote version
+                    git add k8s_manifests/k8smanifest.yaml
+                    git commit --amend --no-edit  # Amend the previous commit with the resolved file
+                    git pull https://${GITHUB_AUTH}@github.com/${GIT_USER_NAME}/${GIT_REPO_NAME} main
+                    */
                     git push https://${GITHUB_AUTH}@github.com/${GIT_USER_NAME}/${GIT_REPO_NAME} HEAD:refs/heads/main
                     '''
                     }
