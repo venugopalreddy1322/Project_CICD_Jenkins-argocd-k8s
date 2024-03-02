@@ -233,28 +233,28 @@ Steps:
 
 1.   Install Operator Lifecycle Manager (OLM), a tool to help manage the Operators running on your cluster.
 
-        '''
+        ```
 
         curl -sL https://github.com/operator-framework/operator-lifecycle-manager/releases/download/v0.27.0/install.sh | bash -s v0.27.0
 
         
-        '''
+        ```
 
 2.   Install the operator by running the following command:
 
-        '''
+        ```
 
         $ kubectl create -f https://operatorhub.io/install/argocd-operator.yaml
         
-        '''
+        ```
 
 3.   After install, watch your operator come up using next command.
 
-        '''
+        ```
 
          $ kubectl get csv -n operators
 
-        '''
+        ```
 
 Usage
 Deploy a basic Argo CD cluster by creating a new ArgoCD resource in the namespace where the operator is installed.
@@ -265,7 +265,7 @@ metadata:
   name: example-argocd
 spec: {}
 
-'''
+```
 
 $ kubectl apply -f basic_argo.yaml
 
@@ -275,23 +275,23 @@ $ kubectl edit svc example-argocd-server
 
 $ minikube service list
 
-'''
+```
 
 then picup the example-argocd-server's url and put it on your browser
 default argocd user name: admin
 to get the password
 
-'''
+```
 
 $ kubectl get secret
 
 $ kubectl edit secret example-argocd-cluster # here encrypted secret will be available.
 
-'''
+```
 
 copy the secret and decode it by the following command
 
-'''
+```
 
 change the service type to NodePort, so we can access the application on browser.
 
