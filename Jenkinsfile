@@ -4,7 +4,6 @@ pipeline {
       DOCKER_IMAGE_NAME = "venu1322/ultimate-cicd"
       DOCKER_IMAGE_TAG = "V${BUILD_ID}"
 
-
     }
     stages {
         /*stage('Build package') {
@@ -54,21 +53,12 @@ pipeline {
                     sh '''
                     git config user.email "venugopalreddy1322@gmail.com"
                     git config user.name "Venugopalreddy1322"
-                    sed -i "s/replaceImageTag/${GIT_REPO_TAG}/g" k8s_manifests/k8smanifest.yaml
+                    sed -i "s/replaceImageTag/${BUILD_REPO_TAG}/g" k8s_manifests/k8smanifest.yaml
                     git add k8s_manifests/k8smanifest.yaml
                     git commit -m "Update deployment image to version ${BUILD_NUMBER}" k8s_manifests/k8smanifest.yaml
-
-                    # Check if the 'main' branch exists in the remote repository
-                    if git ls-remote --heads https://${GITHUB_AUTH}@github.com/${GIT_USER_NAME}/${GIT_REPO_NAME}.git main | grep -q 'main'; then
+                    git branch -M main
                     git fetch https://${GITHUB_AUTH}@github.com/${GIT_USER_NAME}/${GIT_REPO_NAME} main
-                    git checkout main
-                    else
-                    # Create the 'main' branch if it doesn't exist
-                    git checkout -b main
-                    git push -u origin main
-                    fi
-
-                    git checkout main -- k8s_manifests/k8smanifest.yaml  # Checkout the remote version
+                    git checkout FETCH_HEAD k8s_manifests/k8smanifest.yaml  # Checkout the remote version
                     git add k8s_manifests/k8smanifest.yaml
                     git commit --amend --no-edit  # Amend the previous commit with the resolved file
                     git pull https://${GITHUB_AUTH}@github.com/${GIT_USER_NAME}/${GIT_REPO_NAME} main
