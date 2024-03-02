@@ -4,6 +4,7 @@ pipeline {
       DOCKER_IMAGE_NAME = "venu1322/ultimate-cicd"
       DOCKER_IMAGE_TAG = "V${BUILD_ID}"
 
+
     }
     stages {
         /*stage('Build package') {
@@ -45,6 +46,7 @@ pipeline {
             environment {
                 GIT_USER_NAME = "venugopalreddy1322"
                 GIT_REPO_NAME = "Project_CICD_Jenkins-argocd-k8s-manifests-repo"
+                GIT_REPO_TAG = "V${BUILD_ID}"
             }
             steps {
                 script {
@@ -52,7 +54,7 @@ pipeline {
                     sh '''
                     git config user.email "venugopalreddy1322@gmail.com"
                     git config user.name "Venugopalreddy1322"
-                    sed -i "s/replaceImageTag/${BUILD_NUMBER}/g" k8s_manifests/k8smanifest.yaml
+                    sed -i "s/replaceImageTag/${GIT_REPO_TAG}/g" k8s_manifests/k8smanifest.yaml
                     git add k8s_manifests/k8smanifest.yaml
                     git commit -m "Update deployment image to version ${BUILD_NUMBER}" k8s_manifests/k8smanifest.yaml
                     git fetch https://${GITHUB_AUTH}@github.com/${GIT_USER_NAME}/${GIT_REPO_NAME} main
