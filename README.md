@@ -232,12 +232,16 @@ Steps:
 (Source:https://operatorhub.io , follow the steps to install)
 
 1.   Install Operator Lifecycle Manager (OLM), a tool to help manage the Operators running on your cluster.
+
         '''
+
         curl -sL https://github.com/operator-framework/operator-lifecycle-manager/releases/download/v0.27.0/install.sh | bash -s v0.27.0
+
         
         '''
 
 2.   Install the operator by running the following command:
+
         '''
 
         $ kubectl create -f https://operatorhub.io/install/argocd-operator.yaml
@@ -245,8 +249,11 @@ Steps:
         '''
 
 3.   After install, watch your operator come up using next command.
+
         '''
+
          $ kubectl get csv -n operators
+
         '''
 
 Usage
@@ -257,7 +264,9 @@ kind: ArgoCD
 metadata:
   name: example-argocd
 spec: {}
+
 '''
+
 $ kubectl apply -f basic_argo.yaml
 
 $ kubectl get pods
@@ -267,21 +276,28 @@ $ kubectl edit svc example-argocd-server
 $ minikube service list
 
 '''
+
 then picup the example-argocd-server's url and put it on your browser
 default argocd user name: admin
 to get the password
 
 '''
+
 $ kubectl get secret
 
 $ kubectl edit secret example-argocd-cluster # here encrypted secret will be available.
 
 '''
+
 copy the secret and decode it by the following command
+
 '''
-$ 
 
 change the service type to NodePort, so we can access the application on browser.
+
+# screen shots of project execution
+
+![Screenshot ](https://user-images.githubusercontent.com/43399466/228301952-abc02ca2-9942-4a67-8293-f76647b6f9d8.png)
 
 
 This end-to-end Jenkins pipeline will automate the entire CI/CD process for a Java application, from code checkout to production deployment, using popular tools like SonarQube, Argo CD, Helm, and Kubernetes.
