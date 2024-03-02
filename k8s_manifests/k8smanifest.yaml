@@ -29,7 +29,7 @@ metadata:
   
 spec:
   type: NodePort
-  selector::
+  selector:
     app: argocd-k8-app
   ports:
     - port: 8080
