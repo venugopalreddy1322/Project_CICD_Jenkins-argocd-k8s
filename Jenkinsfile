@@ -55,7 +55,7 @@ pipeline {
                     git config user.name "Venugopalreddy1322"
                     sed -i "s/replaceImageTag/${BUILD_REPO_TAG}/g" k8s_manifests/k8smanifest.yaml
                     git add k8s_manifests/k8smanifest.yaml
-                    git commit -m "Update deployment image to version ${BUILD_NUMBER}" k8s_manifests/k8smanifest.yaml
+                    git commit -m "Update deployment image to version ${BUILD_REPO_TAG}" k8s_manifests/k8smanifest.yaml
                     /* git branch -M main
                     git fetch https://${GITHUB_AUTH}@github.com/${GIT_USER_NAME}/${GIT_REPO_NAME} main
                     git checkout FETCH_HEAD k8s_manifests/k8smanifest.yaml  # Checkout the remote version
