@@ -296,7 +296,20 @@ change the service type to NodePort, so we can access the application on browser
 
 # screen shots of project execution
 
-![Screenshot ](https://user-images.githubusercontent.com/43399466/228301952-abc02ca2-9942-4a67-8293-f76647b6f9d8.png)
+![Screenshot_Jenkis_pipeline](https://github.com/venugopalreddy1322/project-diagrams/blob/main/cicd_pics/Jenkins_pipeline.png)
 
+![Screenshot_sonarqube](https://github.com/venugopalreddy1322/project-diagrams/blob/main/cicd_pics/sonarqube.png)
+
+![Screenshot_argo_k8s](https://github.com/venugopalreddy1322/project-diagrams/blob/main/cicd_pics/argo_k8s_00.png)
+
+![Screenshot_argo_k8s_1](https://github.com/venugopalreddy1322/project-diagrams/blob/main/cicd_pics/argocd_kub_1.png)
+
+![Screenshot_argo_gui_1](https://github.com/venugopalreddy1322/project-diagrams/blob/main/cicd_pics/argo_gui_01.png)
+
+![Screenshot_argo_k8s_2](https://github.com/venugopalreddy1322/project-diagrams/blob/main/cicd_pics/argo_kubernetes2.png)
+
+![Screenshot_argo_gui2](https://github.com/venugopalreddy1322/project-diagrams/blob/main/cicd_pics/argocd_gui_2.png)
+
+![Screenshot_final_output](https://github.com/venugopalreddy1322/project-diagrams/blob/main/cicd_pics/cicd_final_output.png)
 
 This end-to-end Jenkins pipeline will automate the entire CI/CD process for a Java application, from code checkout to production deployment, using popular tools like SonarQube, Argo CD, Helm, and Kubernetes.
