@@ -44,9 +44,10 @@ Steps:
         Stage 7: Use Argo CD operator to deploy the application to a kubernetes cluster.
 
     5. Set up Argo CD:
-        Install Argo CD on the Kubernetes cluster. ( Source:https://operatorhub.io )
+        Install Argo CD on the Kubernetes cluster. ( Source:https://operatorhub.io , follow the steps to install)
+               
         Set up a Git repository for Argo CD to track the changes in the repository and Kubernetes manifests.
-        So ArgoCD automatically fetches the application from repo to kubernetes cluster.
+        So ArgoCD automatically fetches the application from GitHub repo to kubernetes cluster.
 
     6. Configure Jenkins pipeline to integrate with Argo CD:
        6.1 Add the Argo CD API token to Jenkins credentials.
@@ -226,5 +227,61 @@ Steps:
     7. Run the Jenkins pipeline:
        7.1 Trigger the Jenkins pipeline to start the CI/CD process for the Java application.
        7.2 Monitor the pipeline stages and fix any issues that arise.
+
+## Installing ArgoCD operator, which creates argoCD controller and setup 
+(Source:https://operatorhub.io , follow the steps to install)
+
+1.   Install Operator Lifecycle Manager (OLM), a tool to help manage the Operators running on your cluster.
+        '''
+        curl -sL https://github.com/operator-framework/operator-lifecycle-manager/releases/download/v0.27.0/install.sh | bash -s v0.27.0
+        
+        '''
+
+2.   Install the operator by running the following command:
+        '''
+
+        $ kubectl create -f https://operatorhub.io/install/argocd-operator.yaml
+        
+        '''
+
+3.   After install, watch your operator come up using next command.
+        '''
+         $ kubectl get csv -n operators
+        '''
+
+Usage
+Deploy a basic Argo CD cluster by creating a new ArgoCD resource in the namespace where the operator is installed.
+$ vim basic_argo.yaml
+apiVersion: argoproj.io/v1alpha1
+kind: ArgoCD
+metadata:
+  name: example-argocd
+spec: {}
+'''
+$ kubectl apply -f basic_argo.yaml
+
+$ kubectl get pods
+
+$ kubectl edit svc example-argocd-server
+
+$ minikube service list
+
+'''
+then picup the example-argocd-server's url and put it on your browser
+default argocd user name: admin
+to get the password
+
+'''
+$ kubectl get secret
+
+$ kubectl edit secret example-argocd-cluster # here encrypted secret will be available.
+
+'''
+copy the secret and decode it by the following command
+'''
+$ 
+
+change the service type to NodePort, so we can access the application on browser.
+
 
 This end-to-end Jenkins pipeline will automate the entire CI/CD process for a Java application, from code checkout to production deployment, using popular tools like SonarQube, Argo CD, Helm, and Kubernetes.
