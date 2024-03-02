@@ -291,7 +291,6 @@ $ kubectl edit secret example-argocd-cluster # here encrypted secret will be ava
 
 copy the secret and decode it by the following command
 
-```
 
 change the service type to NodePort, so we can access the application on browser.
 
